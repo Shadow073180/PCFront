@@ -1,1 +1,1 @@
-web: gunicorn petconnections.wsgi
+web: gunicorn pet-connections.wsgi
