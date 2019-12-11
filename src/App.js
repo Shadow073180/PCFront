@@ -37,9 +37,9 @@ class App extends Component {
     componentDidMount() {
       if (this.state.logged_in) {
         console.log('You are logged in')
-        fetch('https://pcback.herokuapp.com/PC/current_user/', {
+        fetch('http://pcback.herokuapp.com/PC/current_user/', {
           headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`
+            'Authorization': `JWT ${localStorage.getItem('token')}`
           }
         })
           .then(res => res.json())
@@ -52,7 +52,7 @@ class App extends Component {
     handle_login = (e, data) => {
       e.preventDefault();
       console.log('Fetching Token')
-      fetch('https://pcback.herokuapp.com/token-auth/', {
+      fetch('http://pcback.herokuapp.com/token-auth/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ class App extends Component {
     handle_signup = (e, data) => {
       console.log('getting ready to sign you up')
       e.preventDefault();
-      fetch('https://pcback.herokuapp.com/PC/users/', {
+      fetch('http://pcback.herokuapp.com/PC/users/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
