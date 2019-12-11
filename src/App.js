@@ -37,7 +37,7 @@ class App extends Component {
     componentDidMount() {
       if (this.state.logged_in) {
         console.log('You are logged in')
-        fetch('https://cors-anywhere.herokuapp.com/https://pcback.herokuapp.com/PC/current_user/', {
+        fetch('http://localhost:8000/PC/current_user/', {
           headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`
           }
@@ -52,7 +52,7 @@ class App extends Component {
     handle_login = (e, data) => {
       e.preventDefault();
       console.log('Fetching Token')
-      fetch('https://cors-anywhere.herokuapp.com/https://pcback.herokuapp.com/token-auth/', {
+      fetch('http://localhost:8000/token-auth/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ class App extends Component {
     handle_signup = (e, data) => {
       console.log('getting ready to sign you up')
       e.preventDefault();
-      fetch('https://cors-anywhere.herokuapp.com/https://pcback.herokuapp.com/PC/users/', {
+      fetch('http://localhost:8000/PC/users/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -118,6 +118,8 @@ class App extends Component {
         form = null;
     }
 
+    
+
 
   
   return (
@@ -134,34 +136,34 @@ class App extends Component {
     <div align='center' className='Nav-bar-bottom'>
       <hr  className = 'Hr-bottom'/>     
         <button onClick="window.location.reload()">
-          <a href={"/PC/:daterID/messages"} className='navbarMessages'>
+          <a href={`/PC/${this.state.username}/messages`} className='navbarMessages'>
             Messages
           </a>
         </button> 
 
         <button onClick="window.location.reload()" className='Profile-button'>
-          <a href={"/PC/:daterID"}  className='navbarProfile'>
+          <a href={`/PC/${this.state.username}`}  className='navbarProfile'>
             Profile
           </a>
         </button> 
 
         <button onClick="window.location.reload()" className='Account-button'>
-          <a href={"/PC/:daterID/my_account"} className='navbarAccount'>
+          <a href={`/PC/${this.state.username}/my_account`} className='navbarAccount'>
             Account
           </a>
         </button> 
 
         <button onClick="window.location.reload()" >
-          <a href={'/PC/:daterID/search'} className='navbarSearch'>
+          <a href={`/PC/${this.state.username}/search`} className='navbarSearch'>
             Search
           </a>
         </button> 
 
-        <button onClick="window.location.reload()" className='navbar-logout'  align='right' >
+        {/* <button onClick={this.handle_logout} className='navbar-logout'  align='right' >
           <a href={'/login'} className='navbarLogOut'>
             LogOut
           </a>
-        </button> 
+        </button>  */}
       <hr className='Hr-bottom' />  
     </div>
     <div className="App">
@@ -182,9 +184,9 @@ class App extends Component {
           
     <div>
       <BrowserRouter>
-        <Route exact path={`/PC/list${this.state.username}/homepage`} component={HomePage} />
+        <Route exact path={`/PC${this.state.username}/homepage`} component={HomePage} />
         <Route exact path="/add-user" component={Add_User} />
-        <Route exact path="/PC" component={LoginForm}/>
+        <Route exact path="/PC/login" component={LoginForm}/>
         <Route exact path="/PC/:daterID" component={Profile} />
         <Route exact path = "/PC/:daterID/search" component={Search}/>
         <Route exact path = "/PC/:daterID/my_account" component={My_Account} />
