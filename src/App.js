@@ -123,21 +123,6 @@ class App extends Component {
   return (
   <div>
 
-    <div className="App">
-      <Nav
-        logged_in={this.state.logged_in}
-        display_form={this.display_form}
-        handle_logout={this.handle_logout}
-      />
-      {form}
-      <h3>
-        {this.state.logged_in
-          ? `Hello, ${this.state.username}`
-          : 'Please Log In'}
-      </h3>
-    </div>
-
-
     <div align='center' className='title-bar'>
       <h1 className='title'>
         <b>
@@ -172,19 +157,34 @@ class App extends Component {
           </a>
         </button> 
 
-        {/* <button onClick="window.location.reload()" className='navbar-logout'  align='right' >
+        <button onClick="window.location.reload()" className='navbar-logout'  align='right' >
           <a href={'/login'} className='navbarLogOut'>
             LogOut
           </a>
-        </button>  */}
+        </button> 
       <hr className='Hr-bottom' />  
     </div>
+    <div className="App">
+      <Nav
+        logged_in={this.state.logged_in}
+        display_form={this.display_form}
+        handle_logout={this.handle_logout}
+      />
+      {form}
+      <h3>
+        {this.state.logged_in
+          ? `Hello, ${this.state.username}`
+          : 'Please Log In'}
+      </h3>
+    </div>
+
+
           
     <div>
       <BrowserRouter>
-        <Route exact path={`/PC/${this.state.username}/homepage`} component={HomePage} />
+        <Route exact path={`/PC/list${this.state.username}/homepage`} component={HomePage} />
         <Route exact path="/add-user" component={Add_User} />
-        <Route exact path="/PC/login" component={LoginForm}/>
+        <Route exact path="/PC" component={LoginForm}/>
         <Route exact path="/PC/:daterID" component={Profile} />
         <Route exact path = "/PC/:daterID/search" component={Search}/>
         <Route exact path = "/PC/:daterID/my_account" component={My_Account} />
