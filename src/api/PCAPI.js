@@ -19,10 +19,24 @@ const addDater = (daterObject) => {
   })
 }
 
+const handle_login = (data) => {
+  
+  console.log('Fetching Token')
+  console.log(data)
+  return fetch('http://localhost:8000/token-auth/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    
 
+  };
 
 export default {
   fetchDaterByID,
   fetchDaters,
-  addDater
+  addDater,
+  handle_login
 }

@@ -5,6 +5,7 @@ import './App.css';
 import Nav from './components/Nav';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import PCAPI from './api/PCAPI'
 
 import HomePage from './pages/HomePage.js';
 import Add_User from './pages/Add_User.js';
@@ -37,7 +38,7 @@ class App extends Component {
     componentDidMount() {
       if (this.state.logged_in) {
         console.log('You are logged in')
-        fetch('http://pcback.herokuapp.com/PC/current_user/', {
+        fetch('http://localhost:8000/PC/current_user/', {
           headers: {
             'Authorization': `JWT ${localStorage.getItem('token')}`
           }
@@ -49,31 +50,34 @@ class App extends Component {
       }
     }
   
-    handle_login = (e, data) => {
-      e.preventDefault();
-      console.log('Fetching Token')
-      fetch('http://pcback.herokuapp.com/token-auth/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-        .then(res => res.json())
-        .then(json => {
-          localStorage.setItem('token', json.token);
-          this.setState({
-            logged_in: true,
-            displayed_form: '',
-            username: json.user.username
-          });
-        });
-    };
+    
+    
+
+    handle_login = (e, data) =>
+    { e.preventDefault();
+      
+      PCAPI.handle_login(data)
+      .then(res => res.json())
+      .then(json => {
+      
+      localStorage.setItem('token', json.token);
+     
+      
+      
+      
+        console.log(json)
+        this.setState({
+          logged_in: true,
+          displayed_form: '',
+          username: json.user.username
+        })
+      })}
+
   
     handle_signup = (e, data) => {
       console.log('getting ready to sign you up')
       e.preventDefault();
-      fetch('http://pcback.herokuapp.com/PC/users/', {
+      fetch('http://localhost:8000/PC/users/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
