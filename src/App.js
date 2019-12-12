@@ -188,9 +188,9 @@ class App extends Component {
           
     <div>
       <BrowserRouter>
-        <Route exact path={`/PC${this.state.username}/homepage`} component={HomePage} />
+        <Route exact path={`/PC/${this.state.username}/homepage`} component={HomePage} />
         <Route exact path="/add-user" component={Add_User} />
-        <Route exact path="/PC/login" component={LoginForm}/>
+        <Route exact path="/" component={LoginForm}/>
         <Route exact path="/PC/:daterID" component={Profile} />
         <Route exact path = "/PC/:daterID/search" component={Search}/>
         <Route exact path = "/PC/:daterID/my_account" component={My_Account} />
